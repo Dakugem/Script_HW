@@ -1,7 +1,7 @@
 #!/bin/bash
-clear
 while true 
 do 	
+	clear
 	first_lines_of_ps_aux=`ps aux --sort=-%cpu | head -n 2`
 	process_pid=`echo "$first_lines_of_ps_aux" | awk '{print $2}' | tail -n 1`
 	#process_pid=`ps aux --sort=-%cpu  | grep -Pom 1 "[[:space:]]\K([[:digit:]]){1,5}(?=[[:space:]])"| head -n 1`
@@ -11,6 +11,7 @@ do
 	then
 		second_line_of_ps_aux=`echo "$first_lines_of_ps_aux" | tail -n 1`
 
+		echo "Uid: ?"
 		echo "User: `echo "$second_line_of_ps_aux" | awk '{print $1}'`"
 		echo "Pid: $process_pid"
 		echo "Name: ?"
@@ -48,5 +49,4 @@ do
 		cat /proc/$process_pid/limits
 	fi
 	sleep 5
-	clear
 done 
